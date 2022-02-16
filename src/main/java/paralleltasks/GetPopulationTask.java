@@ -16,8 +16,9 @@ public class GetPopulationTask extends RecursiveTask<Integer> {
     CensusGroup[] censusGroups;
     int lo, hi;
     double w, s, e, n;
+    MapCorners grid;
 
-    public GetPopulationTask(CensusGroup[] censusGroups, int lo, int hi, double w, double s, double e, double n) {
+    public GetPopulationTask(CensusGroup[] censusGroups, int lo, int hi, double w, double s, double e, double n, , MapCorners grid) {
         throw new NotYetImplementedException();
     }
 
