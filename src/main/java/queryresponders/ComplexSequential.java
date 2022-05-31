@@ -12,7 +12,6 @@ public class ComplexSequential extends QueryResponder {
     int rows;
     double[] corners;
     private static int[][] grid;
-    private static int[][] grid1;
 
     public ComplexSequential(CensusGroup[] censusData, int numColumns, int numRows) {
         cenGroup = censusData;
@@ -20,7 +19,6 @@ public class ComplexSequential extends QueryResponder {
         cols = numColumns;
         corners = getCorners(censusData);
         grid = new int[numColumns][numRows];
-        grid1 = new int[numColumns][numRows];
         populatearr();
     }
 
@@ -66,9 +64,11 @@ public class ComplexSequential extends QueryResponder {
 
     @Override
     public int getPopulation(int west, int south, int east, int north) {
-        //r1 = west r2 = east c1= north c2 =south
-        return grid[east][south] - grid[west-1][south] - grid[east][north-1] + grid[west-1][north-1];
-        //return grid[south][east] - grid[south][west-1] - grid[north-1][east] + grid[north-1][west-1];
+        int left, upper, box;
+        if (west-2 < 0) left = 0; else left = grid[west-2][north-1];
+        if (south-2 < 0) upper = 0; else upper = grid[east-1][south-2];
+        if (south-2<0 || west-2<0) box = 0; else box = grid[west-2][south-2];
+        return grid[east-1][north-1] - left - upper + box;
     }
 
     @Override
