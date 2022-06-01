@@ -3,6 +3,7 @@ package paralleltasks;
 import cse332.exceptions.NotYetImplementedException;
 import cse332.types.CensusGroup;
 import cse332.types.CornerFindingResult;
+import cse332.types.MapCorners;
 
 import java.util.concurrent.RecursiveTask;
 
@@ -20,18 +21,39 @@ public class CornerFindingTask extends RecursiveTask<CornerFindingResult> {
     int lo, hi;
 
     public CornerFindingTask(CensusGroup[] censusGroups, int lo, int hi) {
-        throw new NotYetImplementedException();
+//        throw new NotYetImplementedException();
+        this.censusGroups = censusGroups;
+        this.lo = lo;
+        this.hi = hi;
     }
 
     // Returns a pair of MapCorners for the grid and Integer for the total population
     // Key = grid, Value = total population
     @Override
     protected CornerFindingResult compute() {
-        throw new NotYetImplementedException();
+        if (hi - lo <= SEQUENTIAL_CUTOFF) {
+            return sequentialCornerFinding(censusGroups, lo, hi);
+        }
+        int mid = lo + (hi - lo) / 2;
+        CornerFindingTask left = new CornerFindingTask(censusGroups, lo, mid);
+        CornerFindingTask right = new CornerFindingTask(censusGroups, mid, hi);
+        left.fork();
+        CornerFindingResult rightResult = right.compute();
+        CornerFindingResult leftResult = left.join();
+        return new CornerFindingResult(leftResult.getMapCorners().encompass(rightResult.getMapCorners()),
+                rightResult.getTotalPopulation() + leftResult.getTotalPopulation());
     }
 
     private CornerFindingResult sequentialCornerFinding(CensusGroup[] censusGroups, int lo, int hi) {
-        throw new NotYetImplementedException();
+        int pop = censusGroups[lo].population;
+        MapCorners first = new MapCorners(censusGroups[lo]);
+        for (int i = lo + 1; i < hi; i++) {
+            MapCorners cur = new MapCorners(censusGroups[i]);
+            first = first.encompass(cur);
+            pop += censusGroups[i].population;
+        }
+        CornerFindingResult ret = new CornerFindingResult(first, pop);
+        return ret;
     }
 }
 
