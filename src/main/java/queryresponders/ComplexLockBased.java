@@ -47,7 +47,6 @@ public class ComplexLockBased extends QueryResponder {
 //        thread.run();
 //        Lock lock = new ReentrantLock();
         MapCorners corners = corner.getMapCorners();
-        System.out.println(lo);
         for (int i = lo; i < censusData.length; i++) {
             CensusGroup cur = censusData[i];
             int colNum = (int) Math.floor((cur.longitude - corners.west) / cellWidth);
