@@ -6,7 +6,6 @@ import cse332.types.MapCorners;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /*
    1) This class is used in version 5 to create the initial grid holding the total population for each grid cell
