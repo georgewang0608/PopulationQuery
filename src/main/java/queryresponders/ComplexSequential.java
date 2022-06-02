@@ -11,7 +11,7 @@ public class ComplexSequential extends QueryResponder {
     int cols;
     int rows;
     double[] corners;
-    private static int[][] grid;
+    private int[][] grid;
 
     public ComplexSequential(CensusGroup[] censusData, int numColumns, int numRows) {
         cenGroup = censusData;
