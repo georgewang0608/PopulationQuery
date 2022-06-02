@@ -45,17 +45,14 @@ public class SimpleSequential extends QueryResponder {
         for (CensusGroup cd: cenGroup) {
             int x = (int) ((cd.longitude - corners[0]) / colInt + 1);
             int y = (int) ((cd.latitude - corners[2]) / rowInt + 1);
-            if (isInGrid(x,y,west,south,east,north)) {
+            if (inGrid(x,y,west,south,east,north)) {
                 pop += cd.population;
             }
         }
         return pop;
     }
 
-    public boolean isInGrid(double x, double y, int w, int s, int e, int n) {
-        return ((x >= w && x < e + 1 && y >= s && y < n + 1) ||
-                (x == e + 1 && x == cols + 1 && y >= s && y < n + 1) ||
-                (y == n + 1 && y == rows + 1 && x >= w && x < e + 1) ||
-                (x == e + 1 && x == cols + 1 && y == n + 1 && y == rows + 1));
+    public boolean inGrid(double x, double y, int west, int south, int east, int north) {
+        return ((x >= west && x < east + 1 && y >= south && y < north + 1) || (x == east + 1 && x == cols + 1 && y == north + 1 && y == rows + 1) || (y == north + 1 && y == rows + 1 && x >= west && x < east + 1) || (x == east + 1 && x == cols + 1 && y >= south && y < north + 1));                ;
     }
 }
