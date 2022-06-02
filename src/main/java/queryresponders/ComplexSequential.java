@@ -1,6 +1,5 @@
 package queryresponders;
 
-import cse332.exceptions.NotYetImplementedException;
 import cse332.interfaces.QueryResponder;
 import cse332.types.CensusGroup;
 import cse332.types.MapCorners;
