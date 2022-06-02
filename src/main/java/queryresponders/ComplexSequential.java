@@ -7,10 +7,10 @@ import cse332.types.MapCorners;
 
 
 public class ComplexSequential extends QueryResponder {
-    CensusGroup[] cenGroup;
-    int cols;
-    int rows;
-    double[] corners;
+    private CensusGroup[] cenGroup;
+    private int cols;
+    private int rows;
+    private double[] corners;
     private int[][] grid;
 
     public ComplexSequential(CensusGroup[] censusData, int numColumns, int numRows) {
@@ -64,6 +64,9 @@ public class ComplexSequential extends QueryResponder {
 
     @Override
     public int getPopulation(int west, int south, int east, int north) {
+        if (west < 1 || south < 1 || east < west || north < south) {
+            throw new IllegalArgumentException();
+        }
         int left, upper, box;
         if (west-2 < 0) left = 0; else left = grid[west-2][north-1];
         if (south-2 < 0) upper = 0; else upper = grid[east-1][south-2];

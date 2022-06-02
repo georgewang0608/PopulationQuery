@@ -32,6 +32,9 @@ public class SimpleParallel extends QueryResponder {
 
     @Override
     public int getPopulation(int west, int south, int east, int north) {
+        if (west < 1 || south < 1 || east < west || north < south) {
+            throw new IllegalArgumentException();
+        }
         double westCord = grid.getMapCorners().west + (west - 1) * colength;
         double eastCord = grid.getMapCorners().west + east * colength;
         double southCord = grid.getMapCorners().south + (south - 1) * rolength;
