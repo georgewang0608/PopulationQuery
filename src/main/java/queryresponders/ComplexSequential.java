@@ -19,7 +19,7 @@ public class ComplexSequential extends QueryResponder {
         cols = numColumns;
         corners = getCorners(censusData);
         grid = new int[numColumns][numRows];
-        populatearr();
+        populateArr();
     }
 
     public double[] getCorners (CensusGroup[] cend) {
@@ -32,7 +32,7 @@ public class ComplexSequential extends QueryResponder {
         return ret;
     }
 
-    public void populatearr() {
+    public void populateArr() {
         double colInt = ((corners[1] - corners[0]) / cols);
         double rowInt = ((corners[3] - corners[2]) / rows);
         for (CensusGroup cd: cenGroup) {
@@ -47,10 +47,10 @@ public class ComplexSequential extends QueryResponder {
             else
                 grid[x][y] += cd.population;
         }
-        populategrid();
+        populateGrid();
     }
 
-    public void populategrid() {
+    public void populateGrid() {
         for (int i = 1; i < grid[0].length; i++)
             grid[0][i] += grid[0][i - 1];
         for (int j = 1; j < grid.length; j++)
