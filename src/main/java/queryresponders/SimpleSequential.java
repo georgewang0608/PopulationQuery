@@ -8,10 +8,11 @@ import cse332.types.MapCorners;
 
 public class SimpleSequential extends QueryResponder {
 
-    CensusGroup[] cenGroup;
-    int cols;
-    int rows;
-    double[] corners;
+    private CensusGroup[] cenGroup;
+    private int cols;
+    private int rows;
+    private double[] corners;
+
     public SimpleSequential(CensusGroup[] censusData, int numColumns, int numRows) {
         cenGroup = censusData;
         rows = numRows;
@@ -39,6 +40,9 @@ public class SimpleSequential extends QueryResponder {
 
     @Override
     public int getPopulation(int west, int south, int east, int north) {
+        if (west < 1 || south < 1 || east < west || north < south) {
+            throw new IllegalArgumentException();
+        }
         int pop = 0;
         double colInt = (corners[1] - corners[0]) / cols;
         double rowInt = (corners[3] - corners[2]) / rows;
