@@ -57,6 +57,6 @@ public class SimpleSequential extends QueryResponder {
     }
 
     public boolean inGrid(double x, double y, int west, int south, int east, int north) {
-        return ((x >= west && x < east + 1 && y >= south && y < north + 1) || (x == east + 1 && x == cols + 1 && y == north + 1 && y == rows + 1) || (y == north + 1 && y == rows + 1 && x >= west && x < east + 1) || (x == east + 1 && x == cols + 1 && y >= south && y < north + 1));                ;
+        return ((x >= west && x < east + 1 && y >= south && y < north + 1) || (x == east + 1 && x == cols + 1 && y == north + 1 && y == rows + 1) || (y == north + 1 && y == rows + 1 && x >= west && x < east + 1) || (x == east + 1 && x == cols + 1 && y >= south && y < north + 1));
     }
 }
